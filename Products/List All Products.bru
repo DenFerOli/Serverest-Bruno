@@ -1,0 +1,41 @@
+meta {
+  name: List All Products
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseURL}}/produtos
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("1 - Status is 200", () => {
+    expect(res.status).to.equal(200)
+  })
+  
+  test("2 - Response Time is Below to 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  
+  
+  
+  
+  // {
+  //   "quantidade": 12,
+  //   "produtos": [
+  //     {
+  //       "nome": "Logitech MX Vertical",
+  //       "preco": 470,
+  //       "descricao": "Mouse",
+  //       "quantidade": 382,
+  //       "_id": "BeeJh5lz3k6kSIzA"
+  //     },
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

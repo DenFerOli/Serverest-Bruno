@@ -1,0 +1,49 @@
+meta {
+  name: Valid Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseURL}}/login
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "test_analyst@email.com",
+    "password": "test"
+  }  
+  
+}
+
+script:post-response {
+  const data = res.getBody();
+  
+  if (res.getStatus() === 200 && data.authorization) {
+    bru.setEnvVar("token", data.authorization);
+    console.log("Token capturado com sucesso!");
+  } else {
+    console.error("Falha ao capturar token")
+  }
+}
+
+tests {
+  test("1 - Response status 200", () => {
+    expect(res.status).to.equal(200)
+  })
+  
+  test("2 - Response Time Below to 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Response Contains The Message Login realizado com sucesso", () => {
+    expect(res.body.message).to.equal("Login realizado com sucesso")
+  })
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

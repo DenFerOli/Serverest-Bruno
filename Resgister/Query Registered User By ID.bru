@@ -1,0 +1,41 @@
+meta {
+  name: Query Registered User By ID
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseURL}}/usuarios/{{userId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("1 - Status 200", () => {
+    expect(res.status).to.equal(200)
+  })
+  
+  test("2 - Reponst time is below to 1 second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Response Contains Name Test Analyst", () => {
+    expect(res.body.nome).to.equal("Test Analyst")
+  })
+  
+  test("4 - Response Contains Email test_analyst@email.com", () => {
+    expect(res.body.email).to.equal("test_analyst@email.com")
+  })
+  // {
+  //   "nome": "Test Analyst 1",
+  //   "email": "test_analyst@email.com",
+  //   "password": "test",
+  //   "administrador": "true",
+  //   "_id": "KhIOavqAhZOqskPD"
+  // }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

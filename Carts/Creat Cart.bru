@@ -1,0 +1,45 @@
+meta {
+  name: Creat Cart
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseURL}}/carrinhos
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: {{token}}
+}
+
+body:json {
+  {
+    "produtos": [
+      {
+        "idProduto": "{{product_id}}",
+        "quantidade": 1
+      }
+    ]
+  }
+}
+
+tests {
+  test("1 - Response Status Is 201 - Created", () => {
+    expect(res.status).to.equal(201);
+  });
+  
+  test("2 - Response Time Is Below To 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000);
+  });
+  
+  test("3 - Response Contain Message", () => {
+    expect(res.body.message).to.equal("Cadastro realizado com sucesso");
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,40 @@
+meta {
+  name: Try Register User Without Required Field Administrador
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseURL}}/usuarios
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome": "Required Field",
+    "email": "required_field@email.com",
+    "password": "test",
+    "administrador": ""
+  }
+}
+
+tests {
+  test("1 - Response Status Is 400 - Bad Request", () => {
+    expect(res.status).to.equal(400)
+  })
+  
+  test("2 - Response Time Is Below To 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Try Register User Without Required Field Password", () => {
+    const body = res.getBody()
+    expect(res.body.administrador).to.equal("administrador deve ser 'true' ou 'false'")
+  })
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,35 @@
+meta {
+  name: Try Register User Without Informations
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseURL}}/usuarios
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("1 - Response Time is 400- Bad Request", () => {
+    expect(res.status).to.equal(400)
+  })
+  
+  test("2 - Response Time Is Below To 1 Seconds", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Check All Required Fields", () => {
+    const body = res.getBody();
+    expect(body.nome).to.equal("nome é obrigatório")
+    expect(body.email).to.equal("email é obrigatório")
+    expect(body.password).to.equal("password é obrigatório")
+    expect(body.administrador).to.equal("administrador é obrigatório")
+  })
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

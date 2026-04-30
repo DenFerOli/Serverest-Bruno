@@ -1,0 +1,37 @@
+meta {
+  name: Invalid Login - Incorrect Email
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseURL}}/login
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "est_analyst@email.com",
+    "password": "test"
+  }
+}
+
+tests {
+  test("1 - Test Status 401 - Unauthorized", () => {
+    expect(res.status).to.equal(401)
+  })
+  
+  test("2 - Response Time Less Than 1 Seconds", () =>{
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Invalid User or Password", () => {
+    expect(res.body.message).to.equal("Email e/ou senha inválidos")
+  })
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

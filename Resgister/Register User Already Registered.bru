@@ -1,0 +1,39 @@
+meta {
+  name: Register User Already Registered
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseURL}}/usuarios
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome": "Test Analyst",
+    "email": "test_analyst@email.com",
+    "password": "test",
+    "administrador": "true"
+  }
+}
+
+tests {
+  test("1 - Status of response 400", () => {
+    expect(res.status).to.equal(400)
+  })
+  
+  test("2 - Response User Already Registered", () => {
+    expect(res.body.message).to.equal("Este email já está sendo usado");
+  })
+  
+  test("3 - Response Time Is Below To 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

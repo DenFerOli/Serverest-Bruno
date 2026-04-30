@@ -1,0 +1,40 @@
+meta {
+  name: Try Register User Without Required Field Email
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseURL}}/usuarios
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome": "Required Field",
+    "email": "",
+    "password": "test",
+    "administrador": "true"
+  }
+}
+
+tests {
+  test("1 - Response Status Is  400- Bad Request", () => {
+    expect(res.status).to.equal(400)
+  })
+  
+  test("2 - Response Time Is Below To 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Try Register User Without Required Field Email", () => {
+    const body = res.getBody();
+    expect(res.body.email).to.equal("email não pode ficar em branco")
+  })
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

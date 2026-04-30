@@ -1,0 +1,44 @@
+meta {
+  name: Create User To Update
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseURL}}/usuarios
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome": "Update Test {{nome}}",
+    "email": "update_test_{{nome}}@email.com",
+    "password": "teste",
+    "administrador": "true"
+  }
+}
+
+tests {
+  const edit_test_id = res.getBody()
+  bru.setEnvVar("edit_test_id", edit_test_id._id)
+  
+  test("1 - Response Status Should Be 201 (Created)", () => {
+    expect(res.status).to.equal(201)
+  })
+  
+  test("2 - Response Time Should Be Below To 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test('3 - Response Message Should Be "Cadastro realizado com sucesso"', () => {
+    expect(res.body.message).to.equal("Cadastro realizado com sucesso")
+  })
+  
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

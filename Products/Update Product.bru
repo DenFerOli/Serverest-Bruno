@@ -1,0 +1,44 @@
+meta {
+  name: Update Product
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{baseURL}}/produtos/{{product_update_id}}
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: {{token}}
+}
+
+body:json {
+  {
+    "nome": "PlaySwitch Deck X {{nome}}",
+    "preco": 800,
+    "descricao": "Console",
+    "quantidade": 10
+  }
+}
+
+tests {
+  test("1 - Response Status Is 200 - Ok", () => {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("2 - Response Time Is Below To 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000);
+  });
+  
+  test("3 - Response Contain Message Registro alterado com sucesso", () => {
+    expect(res.body.message).to.equal("Registro alterado com sucesso");
+  });
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

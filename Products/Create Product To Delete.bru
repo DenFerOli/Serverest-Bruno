@@ -1,0 +1,47 @@
+meta {
+  name: Create Product To Delete
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseURL}}/produtos
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: {{token}}
+}
+
+body:json {
+  {
+    "nome": "PlaySwitch X {{nome}}",
+    "preco": 900,
+    "descricao": "Console",
+    "quantidade": 45
+  }
+}
+
+tests {
+  const responseBody = res.getBody();
+  bru.setEnvVar("product_id", responseBody._id);
+  
+  test("1 - Response Status Is 201 - Created", () => {
+    expect(res.status).to.equal(201);
+  })
+  
+  test("2 - Response Time Is Below To 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000);
+  });
+  
+  test("3 - Response Message Is Cadastro realizado com sucesso", () => {
+    expect(res.body.message).to.equal("Cadastro realizado com sucesso")
+  });
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

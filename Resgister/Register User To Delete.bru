@@ -1,0 +1,43 @@
+meta {
+  name: Register User To Delete
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseURL}}/usuarios
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome": "Delete Test {{nome}}",
+    "email": "delete_test_{{nome}}@email.com",
+    "password": "teste",
+    "administrador": "true"
+  }
+}
+
+tests {
+  const delete_id = res.getBody();
+  bru.setEnvVar("delete_id", delete_id._id);
+  
+  test("1 - Teste Status 201", () => {
+    expect(res.status).to.equal(201)
+  })
+  
+  test("2 - Tempo de resposta é menor que 1 segundo", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Contem a mensagem de cadastro realizado com sucesso", () => {
+    expect(res.body.message).to.equal("Cadastro realizado com sucesso")
+  })
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,37 @@
+meta {
+  name: List Product By ID
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseURL}}/produtos/{{product_update_id}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("1 - Response Status Is 200 - Ok", () => {
+    expect(res.status).to.equal(200)
+  })
+  
+  test("2 - Response Time Is Below To 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  //test("3 - ")
+  
+  
+  // {
+  //   "nome": "PlaySwitch X 93830",
+  //   "preco": 900,
+  //   "descricao": "Console",
+  //   "quantidade": 45,
+  //   "_id": "Lh1Ru5G4INV0W2s0"
+  // }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,24 @@
+meta {
+  name: deletar usuario Test Analyst
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseURL}}/usuarios/{{userId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  const userId = bru.getEnvVar("userId")
+  
+  test(`Usuario ${userId} excluido`, () => {
+    expect(res.body.message).to.equal("Registro excluído com sucesso")
+  })
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

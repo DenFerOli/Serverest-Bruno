@@ -1,0 +1,30 @@
+meta {
+  name: Delete Registered User
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseURL}}/usuarios/{{delete_id}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("1 - Status 200", () => {
+    expect(res.status).to.equal(200)
+  })
+  
+  test("2 - Tempo de Resposta Menor que 1 segundo", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Contem mensagem de Registro Excluido", () => {
+    expect(res.body.message).to.equal("Registro excluído com sucesso")
+  })
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

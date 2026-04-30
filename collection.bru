@@ -1,0 +1,16 @@
+script:pre-request {
+  
+  const date = new Date();
+  const unique_id = `${date.getHours()}${date.getMinutes()}${date.getSeconds()}`
+  
+  bru.setEnvVar("nome", unique_id)
+}
+
+tests {
+  
+  
+  
+  
+  
+  
+}

@@ -1,0 +1,35 @@
+meta {
+  name: Delete Product
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{baseURL}}/produtos/{{product_id}}
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: {{token}}
+}
+
+tests {
+  test("1 - Response Status Is 200 - Ok", () => {
+    expect(res.status).to.equal(200)
+  })
+  
+  test("2 - Response Time Is Below To 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Response Contain Message Registro excluído com sucesso", () => {
+    expect(res.body.message).to.equal("Registro excluído com sucesso")
+  })
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

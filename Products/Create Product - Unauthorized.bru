@@ -1,0 +1,40 @@
+meta {
+  name: Create Product - Unauthorized
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseURL}}/produtos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome": "PlaySwitch X {{nome}}",
+    "preco": 900,
+    "descricao": "Console",
+    "quantidade": 45
+  }
+}
+
+tests {
+  test("1 - Status is 401", () => {
+    expect(res.status).to.equal(401)
+  })
+  
+  test("2 - Response Time Below to 1 Second", () => {
+    expect(res.responseTime).to.be.below(1000)
+  })
+  
+  test("3 - Response Contain Message Token de acesso ausente, inválido, expirado ou usuário do token não existe mais", () => {
+    expect(res.body.message).to.equal("Token de acesso ausente, inválido, expirado ou usuário do token não existe mais")
+  })
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
