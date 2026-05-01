@@ -23,16 +23,16 @@ tests {
   const responseBody = res.getBody();
   bru.setEnvVar("userId", responseBody._id);
   
-  test("1 - Test Status 201 - User Registered", () => {
+  test("1 - Response status is 201 - User Registered", () => {
     expect(res.status).to.equal(201)
   })
   
-  test("2 - Response Time Is Less Than 1 Seconds", () => {
+  test("2 - Response time is below or equal to 1 second", () => {
     expect(res.responseTime).to.be.below(1000)
     //response_time()
   })
   
-  test("3 - User Registered Message", () => {
+  test("3 - Response message is 'Cadastro realizado com sucesso", () => {
     expect(res.body.message).to.equal("Cadastro realizado com sucesso");
   })
   

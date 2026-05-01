@@ -20,15 +20,15 @@ body:json {
 }
 
 tests {
-  test("1 - Response Status Is  400- Bad Request", () => {
+  test("1 - Response status is 400 - Bad Request", () => {
     expect(res.status).to.equal(400)
   })
   
-  test("2 - Response Time Is Below To 1 Second", () => {
+  test("2 - Response time is below or equal to 1 second", () => {
     expect(res.responseTime).to.be.below(1000)
   })
   
-  test("3 - Try Register User Without Required Field Email", () => {
+  test("3 - Fill email is required", () => {
     const body = res.getBody();
     expect(res.body.email).to.equal("email não pode ficar em branco")
   })
