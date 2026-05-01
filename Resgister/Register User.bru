@@ -1,5 +1,5 @@
 meta {
-  name: Register User
+  name: Register user
   type: http
   seq: 1
 }
@@ -21,7 +21,6 @@ body:json {
 
 tests {
   const responseBody = res.getBody();
-  
   bru.setEnvVar("userId", responseBody._id);
   
   test("1 - Test Status 201 - User Registered", () => {
@@ -37,18 +36,6 @@ tests {
     expect(res.body.message).to.equal("Cadastro realizado com sucesso");
   })
   
-  // test("", () => {
-  //   expect()
-  // })
-  
-  // ✔ Status code -
-  // ✔ Tempo de resposta -
-  // ✔ Estrutura do JSON 
-  // ✔ Tipo dos campos
-  // ✔ Conteúdo específico
-  // ✔ Campos obrigatórios
-  // ✔ Tamanho da lista
-  // ✔ Mensagem de erro correta
 }
 
 settings {

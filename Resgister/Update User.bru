@@ -20,21 +20,17 @@ body:json {
 }
 
 tests {
-  test("1 - Response Status Should Be 200 (Ok)", () => {
+  test("1 - Response status is 200 - Ok", () => {
     expect(res.status).to.equal(200)
   })
   
-  test("2 - Response Time Should Be Below To 1 Second", () => {
+  test("2 - Response time is be below to 1 second", () => {
     expect(res.responseTime).to.be.below(1000)
   })
   
-  test('3 - Response Message Should Be "Registro alterado com sucesso"', () => {
+  test("3 - Response message is 'Registro alterado com sucesso'", () => {
     expect(res.body.message).to.equal("Registro alterado com sucesso")
   })
-  
-  // {
-  //   "message": "Registro alterado com sucesso"
-  // }
 }
 
 settings {

@@ -1,5 +1,5 @@
 meta {
-  name: Register User To Delete
+  name: Register user to delete
   type: http
   seq: 5
 }
@@ -23,15 +23,15 @@ tests {
   const delete_id = res.getBody();
   bru.setEnvVar("delete_id", delete_id._id);
   
-  test("1 - Teste Status 201", () => {
+  test("1 - Response status is 201 - Created", () => {
     expect(res.status).to.equal(201)
   })
   
-  test("2 - Tempo de resposta é menor que 1 segundo", () => {
+  test("2 - Response time is below to 1 second", () => {
     expect(res.responseTime).to.be.below(1000)
   })
   
-  test("3 - Contem a mensagem de cadastro realizado com sucesso", () => {
+  test("3 - Response contain message 'cadastro realizado com sucesso'", () => {
     expect(res.body.message).to.equal("Cadastro realizado com sucesso")
   })
   

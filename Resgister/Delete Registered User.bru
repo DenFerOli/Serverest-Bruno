@@ -1,5 +1,5 @@
 meta {
-  name: Delete Registered User
+  name: Delete registered user
   type: http
   seq: 6
 }
@@ -11,15 +11,15 @@ delete {
 }
 
 tests {
-  test("1 - Status 200", () => {
+  test("1 - Response status is 200 - Ok", () => {
     expect(res.status).to.equal(200)
   })
   
-  test("2 - Tempo de Resposta Menor que 1 segundo", () => {
+  test("2 - Response time is below to 1 second", () => {
     expect(res.responseTime).to.be.below(1000)
   })
   
-  test("3 - Contem mensagem de Registro Excluido", () => {
+  test("3 - Response contain message 'Registro Excluido'", () => {
     expect(res.body.message).to.equal("Registro excluído com sucesso")
   })
 }

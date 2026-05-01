@@ -1,5 +1,5 @@
 meta {
-  name: List All Registered Users
+  name: Query all registered users
   type: http
   seq: 3
 }
@@ -11,30 +11,19 @@ get {
 }
 
 tests {
-  test("1 - Status code 200", () => {
+  test("1 - Response status is 200 - Ok", () => {
     expect(res.status).to.equal(200);
   });
   
-  test("2 - Response time is below to 1000 milisecond", () => {
-    const time = res.responseTime;
-    
-    expect(time).to.be.below(2000);
-    
-    if (time <= 500) {
-      console.log("Performance Ideal");
-    } else if (time <= 1000) {
-      console.log("Performance Acceptable");
-    } else {
-      console.warn("Performance Slow")
-    }
-    
+  test("2 - Response time is below to 1 second", () => {
+    expect(res.responseTime).to.be.below(1000)  
   });
   
-  test("3 - Validar tipos de dados", () => {
+  test("3 - Check data type", () => {
     expect(res.body.usuarios).to.be.an("array");
   });
   
-  test("4 - Validar propriedades", () => {
+  test("4 - Check properties", () => {
     expect(res.body).to.have.property("usuarios");
   })
   
@@ -42,7 +31,7 @@ tests {
     expect(res.body.usuarios.length).to.be.greaterThan(0);
   });
   
-  test("6 - Consultar a estrutura", () => {
+  test("6 - Query the structure", () => {
     const usuario = res.body.usuarios[0];
     
   expect(usuario).to.have.all.keys(
