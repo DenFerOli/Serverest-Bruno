@@ -15,24 +15,9 @@ tests {
     expect(res.status).to.equal(200)
   })
   
-  test("2 - Response Time is Below to 1 Second", () => {
+  test("2 - Response time is below or equal to 1 second", () => {
     expect(res.responseTime).to.be.below(1000)
   })
-  
-  
-  
-  
-  
-  // {
-  //   "quantidade": 12,
-  //   "produtos": [
-  //     {
-  //       "nome": "Logitech MX Vertical",
-  //       "preco": 470,
-  //       "descricao": "Mouse",
-  //       "quantidade": 382,
-  //       "_id": "BeeJh5lz3k6kSIzA"
-  //     },
 }
 
 settings {

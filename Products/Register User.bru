@@ -28,7 +28,7 @@ tests {
     expect(res.status).to.equal(201)
   })
   
-  test("2 - Response Time Is Less Than 1 Seconds", () => {
+  test("2 - Response time is below or equal to 1 second", () => {
     expect(res.responseTime).to.be.below(1000)
     //response_time()
   })

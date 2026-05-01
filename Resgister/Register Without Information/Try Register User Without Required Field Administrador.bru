@@ -28,7 +28,7 @@ tests {
     expect(res.responseTime).to.be.below(1000)
   })
   
-  test("3 - Fill administrado with 'true' or 'false' is required", () => {
+  test("3 - Fill administrador with 'true' or 'false' is required", () => {
     const body = res.getBody()
     expect(res.body.administrador).to.equal("administrador deve ser 'true' ou 'false'")
   })
